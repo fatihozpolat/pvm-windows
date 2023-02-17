@@ -132,8 +132,13 @@ async function decompressPhpZip(versionDir) {
     await decompress(`${versionDir}php.zip`, versionDir);
     console.log('Removing PHP zip...')
     fs.unlinkSync(`${versionDir}php.zip`);
-    
+
     fs.copyFileSync(`${versionDir}php.ini-development`, `${versionDir}php.ini`);
+
+    // changed php.ini file
+    const phpIni = fs.readFileSync(`${versionDir}php.ini`, 'utf8');
+    const phpIniChanged = phpIni.replace(/;extension_dir = "ext"/g, 'extension_dir = "ext"');
+    fs.writeFileSync(`${versionDir}php.ini`, phpIniChanged, 'utf8');
 }
 
 /**
