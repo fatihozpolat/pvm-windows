@@ -1,5 +1,5 @@
 {
-  "name": "pvm",
+  "name": "pvm-windows",
   "version": "1.0.0",
   "description": "PHP Version Manager",
   "main": "index.js",
