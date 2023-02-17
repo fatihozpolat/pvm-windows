@@ -6,7 +6,8 @@ const {
     listUsablePHPVersions,
     setPHPVersion,
     downloadPHP,
-    createPvm
+    createPvm,
+    openPHPPath
 } = require('../index');
 
 program
@@ -51,6 +52,15 @@ program
     .description('List all downloadable PHP versions')
     .action(async () => {
         await listDownloadablePHPVersions();
+    });
+
+
+program
+    .command('openphpdir')
+    .alias('o')
+    .description('Open the PHP directory')
+    .action(() => {
+        openPHPPath();
     });
 
 program.parse(process.argv);

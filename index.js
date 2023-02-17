@@ -261,10 +261,24 @@ async function downloadPHP(version) {
     }
 }
 
+/**
+ * Open PHP directory in explorer
+ */
+function openPHPPath() {
+    exec(`explorer ${process.env.PHP_SYMLINK}`, (err, stdout, stderr) => {
+        if (err) {
+            console.log(err.message);
+            return;
+        }
+        console.log('Successfully opened PHP directory.');
+    });
+}
+
 exports.listDownloadablePHPVersions = listDownloadablePHPVersions;
 exports.listUsablePHPVersions = listUsablePHPVersions;
 exports.setPHPVersion = setPHPVersion;
 exports.downloadPHP = downloadPHP;
 exports.sha256File = sha256File;
 exports.decompressPhpZip = decompressPhpZip;
+exports.openPHPPath = openPHPPath;
 exports.createPvm = createPvm;
