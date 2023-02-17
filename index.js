@@ -135,6 +135,19 @@ async function decompressPhpZip(versionDir) {
 
     fs.copyFileSync(`${versionDir}php.ini-development`, `${versionDir}php.ini`);
 
+    // download https://curl.se/ca/cacert.pem
+    await new Promise((resolve, reject) => {
+        axios.get('https://curl.se/ca/cacert.pem', {
+            responseType: 'stream',
+            ...axiosConfig
+        }).then((response) => {
+            response.data.pipe(fs.createWriteStream(`${versionDir}cacert.pem`));
+            response.data.on('end', () => {
+                resolve();
+            });
+        });
+    });
+
     // changed php.ini file
     const phpIni = fs.readFileSync(`${versionDir}php.ini`, 'utf8');
 
@@ -149,7 +162,9 @@ async function decompressPhpZip(versionDir) {
         .replace(/;extension=openssl/g, 'extension=openssl')
         .replace(/;extension=pdo_mysql/g, 'extension=pdo_mysql')
         .replace(/;extension=soap/g, 'extension=soap')
-        .replace(/;extension=xsl/g, 'extension=xsl');
+        .replace(/;extension=xsl/g, 'extension=xsl')
+        .replace(/;curl.cainfo =/g, 'curl.cainfo = "cacert.pem"')
+        .replace(/;openssl.cafile=/g, 'openssl.cafile = "cacert.pem"');
 
     fs.writeFileSync(`${versionDir}php.ini`, newPhpIni, 'utf8');
 }
