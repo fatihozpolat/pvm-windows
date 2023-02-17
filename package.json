@@ -1,5 +1,5 @@
 {
-  "name": "pvm-windows",
+  "name": "@fatihozpolat/pvm-windows",
   "version": "1.0.0",
   "description": "PHP Version Manager",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fatihozpolat/pvm-windows"
+    "url": "git+https://github.com/fatihozpolat/pvm-windows.git"
   },
   "keywords": [
     "pvm",
@@ -18,7 +18,7 @@
     "manager"
   ],
   "bin": {
-    "pvm": "./bin/pvm.js"
+    "pvm": "bin/pvm.js"
   },
   "author": "Fatih Özpolat",
   "license": "ISC",
@@ -26,5 +26,10 @@
     "axios": "^1.3.3",
     "commander": "^10.0.0",
     "decompress": "^4.2.1"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/fatihozpolat/pvm-windows/issues"
+  },
+  "homepage": "https://github.com/fatihozpolat/pvm-windows#readme",
+  "devDependencies": {}
 }
