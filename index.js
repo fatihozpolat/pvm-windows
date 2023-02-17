@@ -148,6 +148,8 @@ async function decompressPhpZip(versionDir) {
         });
     });
 
+    const cacertPath = `${versionDir}cacert.pem`;
+
     // changed php.ini file
     const phpIni = fs.readFileSync(`${versionDir}php.ini`, 'utf8');
 
@@ -163,8 +165,8 @@ async function decompressPhpZip(versionDir) {
         .replace(/;extension=pdo_mysql/g, 'extension=pdo_mysql')
         .replace(/;extension=soap/g, 'extension=soap')
         .replace(/;extension=xsl/g, 'extension=xsl')
-        .replace(/;curl.cainfo =/g, 'curl.cainfo = "cacert.pem"')
-        .replace(/;openssl.cafile=/g, 'openssl.cafile = "cacert.pem"');
+        .replace(/;curl.cainfo =/g, `curl.cainfo = "${cacertPath}"`)
+        .replace(/;openssl.cafile=/g, `openssl.cafile="${cacertPath}"`);
 
     fs.writeFileSync(`${versionDir}php.ini`, newPhpIni, 'utf8');
 }
