@@ -137,8 +137,21 @@ async function decompressPhpZip(versionDir) {
 
     // changed php.ini file
     const phpIni = fs.readFileSync(`${versionDir}php.ini`, 'utf8');
-    const phpIniChanged = phpIni.replace(/;extension_dir = "ext"/g, 'extension_dir = "ext"');
-    fs.writeFileSync(`${versionDir}php.ini`, phpIniChanged, 'utf8');
+
+    const newPhpIni = phpIni.replace(/;extension_dir = "ext"/g, 'extension_dir = "ext"')
+        .replace(/;extension=curl/g, 'extension=curl')
+        .replace(/;extension=fileinfo/g, 'extension=fileinfo')
+        .replace(/;extension=gd2/g, 'extension=gd2')
+        .replace(/;extension=intl/g, 'extension=intl')
+        .replace(/;extension=mbstring/g, 'extension=mbstring')
+        .replace(/;extension=exif/g, 'extension=exif')
+        .replace(/;extension=mysqli/g, 'extension=mysqli')
+        .replace(/;extension=openssl/g, 'extension=openssl')
+        .replace(/;extension=pdo_mysql/g, 'extension=pdo_mysql')
+        .replace(/;extension=soap/g, 'extension=soap')
+        .replace(/;extension=xsl/g, 'extension=xsl');
+
+    fs.writeFileSync(`${versionDir}php.ini`, newPhpIni, 'utf8');
 }
 
 /**
