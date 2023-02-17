@@ -145,10 +145,8 @@ function createSym() {
             console.log(err.message);
             return;
         }
-        console.log(stdout);
+        console.log('Successfully set PHP_SYMLINK environment variable.');
     });
-
-    console.log('PHP_SYMLINK set. Add it to your PATH variable to use it. => %PHP_SYMLINK%');
 }
 
 /**
