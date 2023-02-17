@@ -132,6 +132,8 @@ async function decompressPhpZip(versionDir) {
     await decompress(`${versionDir}php.zip`, versionDir);
     console.log('Removing PHP zip...')
     fs.unlinkSync(`${versionDir}php.zip`);
+    
+    fs.copyFileSync(`${versionDir}php.ini-development`, `${versionDir}php.ini`);
 }
 
 /**
