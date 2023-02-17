@@ -18,7 +18,7 @@
     "manager"
   ],
   "bin": {
-    "pvm": "bin/pvm.js"
+    "pvm": "./bin/pvm.js"
   },
   "author": "Fatih Özpolat",
   "license": "ISC",
